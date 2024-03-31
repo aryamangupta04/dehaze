@@ -76,7 +76,8 @@ class RESIDE_Dataset(data.Dataset):
 import os
 pwd=os.getcwd()
 print(pwd)
-path='C:/Users/HP PAVILION/Desktop/gans/dataset'
+# path='C:/Users/HP PAVILION/Desktop/gans/dataset'
+path='/kaggle/working/dehaze/dataset'
 #path to your 'data' folder
 
 ITS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/SOTS/indoor',train=True,size=crop_size),batch_size=10,shuffle=True)
