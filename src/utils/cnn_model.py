@@ -15,6 +15,7 @@ class Autoencoder(nn.Module):
         # Encoder
         self.encoder = nn.Sequential(
             nn.Conv2d(3,1,1),
+            nn.ReLU(),
             nn.Conv2d(1, 32, 3, padding=1),  # batch x 32 x 256 x 256
             nn.ReLU(),
             nn.BatchNorm2d(32),
@@ -61,7 +62,9 @@ class Autoencoder(nn.Module):
             nn.ReLU(),
             nn.BatchNorm2d(32),
             nn.ConvTranspose2d(32, 1, 3, 2, 1, 1),
-            nn.ReLU()  # Consider using nn.Sigmoid() if the final output needs to be in [0,1]
+            nn.ReLU(), # Consider using nn.Sigmoid() if the final output needs to be in [0,1]
+            nn.Conv2d(1,3,1),
+            nn.Sigmoid()
         )
 
     def forward(self, x):
