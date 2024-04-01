@@ -3,6 +3,8 @@ import torchvision.transforms as tfs
 from torchvision.transforms import functional as FF
 import os,sys
 sys.path.append('.')
+from torchvision.transforms import Resize
+
 sys.path.append('..')
 import numpy as np
 import torch
@@ -38,6 +40,7 @@ class RESIDE_Dataset(data.Dataset):
         self.haze_imgs_dir=os.listdir(os.path.join(path,'hazy'))
         self.haze_imgs=[os.path.join(path,'hazy',img) for img in self.haze_imgs_dir]
         self.clear_dir=os.path.join(path,'gt')
+        self.resize = Resize((460, 620))
         print(os.path)
     def __getitem__(self, index):
         haze=Image.open(self.haze_imgs[index])
@@ -45,11 +48,13 @@ class RESIDE_Dataset(data.Dataset):
             while haze.size[0]<self.size or haze.size[1]<self.size :
                 index=random.randint(1400,1450)
                 haze=Image.open(self.haze_imgs[index])
+                haze=self.resize(haze)
         img=self.haze_imgs[index]
         id=img.split('/')[-1].split('_')[0]
         id=id.split('\\')[-1]
         clear_name=id+self.format
         clear=Image.open(os.path.join(self.clear_dir,clear_name))
+        clear=self.resize(clear)
         clear=tfs.CenterCrop(haze.size[::-1])(clear)
         if not isinstance(self.size,str):
             i,j,h,w=tfs.RandomCrop.get_params(haze,output_size=(self.size,self.size))
