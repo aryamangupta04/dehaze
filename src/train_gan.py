@@ -61,10 +61,10 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
             epoch_loss_g += g_loss.item()
             epoch_loss_d += d_loss.item()
             t=t+1
-            if t==1:
-                show_images(data.cpu(), title="Input Images", nrow=5)
-                show_images(generated_imgs.cpu(), title="Generated Images", nrow=5)
-                show_images(targets.cpu(), title="Target Images", nrow=5)
+            # if t==1:
+            #     show_images(data.cpu(), title="Input Images", nrow=5)
+            #     show_images(generated_imgs.cpu(), title="Generated Images", nrow=5)
+            #     show_images(targets.cpu(), title="Target Images", nrow=5)
 
         avg_psnr = validate_and_calculate_psnr(val_loader, generator, device)
         print(f"Epoch {epoch + 1}, G_loss: {epoch_loss_g:.4f}, D_loss: {epoch_loss_d:.4f}, Avg PSNR: {avg_psnr:.2f} dB")
