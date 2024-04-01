@@ -29,8 +29,9 @@ def show_images(images, title=None, nrow=5):
 def train_GAN(generator, discriminator, train_loader, val_loader, device, num_epochs):
     # Losses & optimizers
     adversarial_loss = nn.BCELoss()
-    optimizer_G = optim.Adam(generator.parameters(), lr=0.002)
-    optimizer_D = optim.Adam(discriminator.parameters(), lr=0.0001)
+    g_lr=0.002
+    optimizer_G = optim.Adam(generator.parameters(), lr=0.003)
+    optimizer_D = optim.Adam(discriminator.parameters(), lr=0.00001)
     highest_psnr = 0.0
     for epoch in range(num_epochs):
         t=0
