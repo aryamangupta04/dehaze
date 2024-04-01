@@ -40,7 +40,7 @@ class RESIDE_Dataset(data.Dataset):
         self.haze_imgs_dir=os.listdir(os.path.join(path,'hazy'))
         self.haze_imgs=[os.path.join(path,'hazy',img) for img in self.haze_imgs_dir]
         self.clear_dir=os.path.join(path,'gt')
-        self.resize = Resize((512, 512))
+        self.resize = Resize((620, 460))
         print(os.path)
     def __getitem__(self, index):
         haze=Image.open(self.haze_imgs[index])
