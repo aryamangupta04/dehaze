@@ -11,6 +11,7 @@ from torchvision.utils import make_grid
 
 def train(train_loader,model,epochs,iterations,device):
     i=0
+    model.train()
     for epoch in range(epochs):
         epoch_loss=0.0
         t=0
@@ -23,7 +24,7 @@ def train(train_loader,model,epochs,iterations,device):
             loss.backward()
             epoch_loss+=loss.item()
         print("the loss for epoch ",i," is ",epoch_loss)
-        if(epoch==3 and i==0):
+        if(epoch==3):
             validate_and_visualize(val_loader,model,device)
         i=i+1
 def validate_and_visualize(val_loader, model, device):

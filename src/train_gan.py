@@ -5,7 +5,7 @@ import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from utils.parse import opt
 from utils.gan_model import Generator,Discriminator
-from utils.dataset_utils import OTS_train_loader
+from utils.dataset_utils import OTS_train_loader,ITS_train_loader
 def train_GAN(generator, discriminator, dataloader, num_epochs):
     # Losses & optimizers
     adversarial_loss = nn.BCELoss()
