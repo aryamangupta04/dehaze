@@ -44,6 +44,7 @@ class RESIDE_Dataset(data.Dataset):
         print(os.path)
     def __getitem__(self, index):
         haze=Image.open(self.haze_imgs[index])
+        haze=self.resize(haze)
         if isinstance(self.size,int):
             while haze.size[0]<self.size or haze.size[1]<self.size :
                 index=random.randint(1400,1450)
