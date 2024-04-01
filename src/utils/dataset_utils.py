@@ -10,7 +10,7 @@ import numpy as np
 import torch
 import random
 from PIL import Image
-from torch.utils.data import DataLoader
+from torch.utils.data import DataLoader,random_split
 from matplotlib import pyplot as plt
 from torchvision.utils import make_grid
 from utils.parse import opt
@@ -85,9 +85,24 @@ print(pwd)
 #path='C:/Users/HP PAVILION/Desktop/gans/dataset'
 path='/kaggle/working/dehaze/dataset'
 #path to your 'data' folder
+OTS_dataset = RESIDE_Dataset(path+'/SOTS/outdoor', train=False, size='whole img')
 
-ITS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/SOTS/indoor',train=True,size=crop_size),batch_size=1,shuffle=True)
-OTS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/SOTS/outdoor',train=False,size='whole img'),batch_size=16,shuffle=False)
+# Define split sizes
+total_size = len(OTS_dataset)
+train_size = int(0.7 * total_size)
+val_size = int(0.15 * total_size)
+test_size = total_size - train_size - val_size
+
+# Randomly split the dataset
+OTS_train_dataset, OTS_val_dataset, OTS_test_dataset = random_split(OTS_dataset, [train_size, val_size, test_size])
+
+# Create DataLoader for each set
+OTS_train_loader = DataLoader(dataset=OTS_train_dataset, batch_size=16, shuffle=True)
+OTS_val_loader = DataLoader(dataset=OTS_val_dataset, batch_size=1, shuffle=False)
+OTS_test_loader = DataLoader(dataset=OTS_test_dataset, batch_size=1, shuffle=False)
+
+# ITS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/SOTS/indoor',train=True,size=crop_size),batch_size=1,shuffle=True)
+# OTS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/SOTS/outdoor',train=False,size='whole img'),batch_size=16,shuffle=False)
 
 #OTS_train_loader=DataLoader(dataset=RESIDE_Dataset(path+'/RESIDE/OTS',train=True,format='.jpg'),batch_size=BS,shuffle=True)
 #OTS_test_loader=DataLoader(dataset=RESIDE_Dataset(path+'/RESIDE/SOTS/outdoor',train=False,size='whole img',format='.png'),batch_size=1,shuffle=False)

@@ -5,7 +5,7 @@ import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from utils.parse import opt
 from utils.gan_model import Generator,Discriminator
-from utils.dataset_utils import OTS_train_loader,ITS_train_loader
+from utils.dataset_utils import OTS_train_loader
 def train_GAN(generator, discriminator, dataloader, num_epochs):
     # Losses & optimizers
     adversarial_loss = nn.BCELoss()
@@ -15,7 +15,7 @@ def train_GAN(generator, discriminator, dataloader, num_epochs):
     for epoch in range(num_epochs):
         epoch_loss_g=0.0
         epoch_loss_d=0.0
-        for data,imgs in dataloader:
+        for imgs,data in dataloader:
             valid = torch.ones((imgs.size(0), 1), requires_grad=False)
             fake = torch.zeros((imgs.size(0), 1), requires_grad=False)
 
