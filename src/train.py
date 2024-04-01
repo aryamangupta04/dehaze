@@ -8,7 +8,20 @@ from utils.cnn_model import Autoencoder
 from utils.dataset_utils import OTS_train_loader,OTS_val_loader
 import matplotlib.pyplot as plt
 from torchvision.utils import make_grid
-
+import torchvision.utils
+import numpy as np
+def show_images(images, title=None, nrow=5):
+    """
+    Utility function for showing images with matplotlib
+    """
+    images = torchvision.utils.make_grid(images, nrow=nrow)
+    np_images = images.numpy()
+    plt.figure(figsize=(20, 10))
+    plt.imshow(np.transpose(np_images, (1, 2, 0)))
+    if title:
+        plt.title(title)
+    plt.axis('off')
+    plt.show()
 def train(train_loader,model,epochs,iterations,device):
     i=0
     model.train()
@@ -30,6 +43,11 @@ def train(train_loader,model,epochs,iterations,device):
         i=i+1
         avg_psnr = validate_and_calculate_psnr(val_loader, model, device)
         print(f"Epoch {epoch + 1}, Average PSNR: {avg_psnr} dB")
+        t=t+1
+        if t==1:
+            show_images(data.cpu(), title="Input Images", nrow=5)
+            show_images(x.cpu(), title="Generated Images", nrow=5)
+            show_images(targets.cpu(), title="Target Images", nrow=5)
 
         # Save the model if it has the highest PSNR so far
         if avg_psnr > highest_psnr:

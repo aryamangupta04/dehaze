@@ -40,7 +40,7 @@ class RESIDE_Dataset(data.Dataset):
         self.haze_imgs_dir=os.listdir(os.path.join(path,'hazy'))
         self.haze_imgs=[os.path.join(path,'hazy',img) for img in self.haze_imgs_dir]
         self.clear_dir=os.path.join(path,'gt')
-        self.resize = Resize((460, 620))
+        self.resize = Resize((512, 512))
         print(os.path)
     def __getitem__(self, index):
         haze=Image.open(self.haze_imgs[index])
@@ -84,8 +84,8 @@ class RESIDE_Dataset(data.Dataset):
 import os
 pwd=os.getcwd()
 print(pwd)
-#path='C:/Users/HP PAVILION/Desktop/gans/dataset'
-path='/kaggle/working/dehaze/dataset'
+path='C:/Users/HP PAVILION/Desktop/gans/dataset'
+#path='/kaggle/working/dehaze/dataset'
 #path to your 'data' folder
 OTS_dataset = RESIDE_Dataset(path+'/SOTS/outdoor', train=False, size='whole img')
 
