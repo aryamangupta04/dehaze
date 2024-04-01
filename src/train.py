@@ -5,7 +5,7 @@ import torchvision.datasets as datasets
 import torchvision.transforms as transforms
 from utils.parse import opt
 from utils.cnn_model import Autoencoder
-from utils.dataset_utils import ITS_train_loader
+from utils.dataset_utils import OTS_train_loader
 def train(train_loader,model,epochs,iterations,device):
     i=0
     for epoch in range(epochs):
@@ -24,7 +24,7 @@ def train(train_loader,model,epochs,iterations,device):
 
 
 if __name__=='__main__':
-    train_loader=ITS_train_loader
+    train_loader=OTS_train_loader
     model=Autoencoder().to(opt.device)
     loss_func=nn.L1Loss()
     optimizer=optim.Adam(model.parameters(),lr=opt.lr)
