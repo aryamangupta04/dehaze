@@ -84,8 +84,8 @@ class RESIDE_Dataset(data.Dataset):
 import os
 pwd=os.getcwd()
 print(pwd)
-path='C:/Users/HP PAVILION/Desktop/gans/dataset'
-#path='/kaggle/working/dehaze/dataset'
+#path='C:/Users/HP PAVILION/Desktop/gans/dataset'
+path='/kaggle/working/dehaze/dataset'
 #path to your 'data' folder
 OTS_dataset = RESIDE_Dataset(path+'/SOTS/outdoor', train=False, size='whole img')
 

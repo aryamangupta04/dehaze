@@ -36,6 +36,7 @@ def train(train_loader,model,epochs,iterations,device):
             loss=loss_func(x,targets)
             optimizer.zero_grad()
             loss.backward()
+            optimizer.step()
             epoch_loss+=loss.item()
         print("the loss for epoch ",i," is ",epoch_loss)
         # if(epoch==3):
