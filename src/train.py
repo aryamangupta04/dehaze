@@ -26,7 +26,7 @@ def train(train_loader,model,epochs,iterations,device):
 if __name__=='__main__':
     train_loader=OTS_train_loader
     model=Autoencoder().to(opt.device)
-    loss_func=nn.L1Loss()
+    loss_func=nn.MSELoss()
     optimizer=optim.Adam(model.parameters(),lr=opt.lr)
     train(train_loader,model,opt.epochs,opt.itr,opt.device)
     

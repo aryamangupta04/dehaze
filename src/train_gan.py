@@ -19,9 +19,7 @@ def train_GAN(generator, discriminator, dataloader, num_epochs):
             valid = torch.ones((imgs.size(0), 1), requires_grad=False)
             fake = torch.zeros((imgs.size(0), 1), requires_grad=False)
 
-            # Train Generator
             optimizer_G.zero_grad()
-            #z = torch.randn(imgs.shape[0], 3, 620, 460) # Random noise
             generated_imgs = generator(data)
             g_loss = adversarial_loss(discriminator(generated_imgs), valid)
             g_loss.backward()
