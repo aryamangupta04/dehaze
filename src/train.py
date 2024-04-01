@@ -44,7 +44,7 @@ def validate_and_calculate_psnr(val_loader, model, device):
             data, targets = data.to(device), targets.to(device)
             outputs = model(data)
             mse_loss = nn.MSELoss()(outputs, targets)
-            psnr = 10 * torch.log10(1 / mse_loss)
+            psnr = 20 * torch.log10(1 / mse_loss)
             total_psnr += psnr.item()
     avg_psnr = total_psnr / len(val_loader)
     return avg_psnr

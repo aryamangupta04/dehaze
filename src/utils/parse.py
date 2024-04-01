@@ -4,7 +4,7 @@ import torch
 parser=argparse.ArgumentParser()
 parser.add_argument('--steps',type=int)
 parser.add_argument('--device',type=str)
-parser.add_argument('--epochs',default=100,type=int)
+parser.add_argument('--epochs',default=30,type=int)
 parser.add_argument('--crop_size',type=int)
 parser.add_argument('--lr',default=0.0001,type=float)
 parser.add_argument('--crop',action='store_true')
