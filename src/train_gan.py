@@ -30,7 +30,7 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
     # Losses & optimizers
     lam=0.1
     adversarial_loss = nn.BCELoss()
-    rec_loss=nn.L1Loss()
+    rec_loss=nn.MSELoss()
     g_lr=0.002
     optimizer_G = optim.Adam(generator.parameters(), lr=0.03)
     optimizer_D = optim.Adam(discriminator.parameters(), lr=0.0009)
