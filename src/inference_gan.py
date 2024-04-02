@@ -3,8 +3,8 @@ import torchvision.transforms as transforms
 from torchvision.utils import make_grid
 import matplotlib.pyplot as plt
 from utils.parse import opt
-from utils.gan_model import Generator  # Ensure this is the correct import path
-from utils.dataset_utils import OTS_test_loader  # Ensure the dataset is appropriate for your task
+from utils.gan_model import Generator  
+from utils.dataset_utils import OTS_test_loader  
 
 def calculate_psnr(img1, img2):
     mse = torch.mean((img1 - img2) ** 2)
@@ -44,8 +44,8 @@ def visualize_sample(data_loader, model, device, num_images=3):
 
 if __name__ == '__main__':
     device = torch.device(opt.device if torch.cuda.is_available() else 'cpu')
-    model_path = 'best_generator_model.pth'  # Adjust this path to your saved generator model
+    model_path = 'best_generator_model.pth' 
     model = load_model(model_path, device)
-    test_loader = OTS_test_loader  # Make sure this is the correct DataLoader for your task
+    test_loader = OTS_test_loader  
     inference(test_loader, model, device)
     visualize_sample(test_loader, model, device)

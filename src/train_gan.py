@@ -28,6 +28,7 @@ def show_images(images, title=None, nrow=5):
 
 def train_GAN(generator, discriminator, train_loader, val_loader, device, num_epochs):
     # Losses & optimizers
+    lam=0.1
     adversarial_loss = nn.BCELoss()
     rec_loss=nn.L1Loss()
     g_lr=0.002
@@ -55,7 +56,7 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
             # Train Generator
             optimizer_G.zero_grad()
             # generated_imgs = generator(data)
-            g_loss = adversarial_loss(discriminator(generated_imgs), valid)
+            g_loss = lam*adversarial_loss(discriminator(generated_imgs), valid)
             g_rec_loss=rec_loss(generated_imgs,targets)
             g_total_loss=g_loss+g_rec_loss
             g_total_loss.backward()
