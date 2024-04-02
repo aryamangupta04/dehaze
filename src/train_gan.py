@@ -56,15 +56,15 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
             optimizer_G.zero_grad()
             # generated_imgs = generator(data)
             g_loss = adversarial_loss(discriminator(generated_imgs), valid.squeeze(1))
-            g_rec_loss=rec_loss(generated_imgs.detach(),targets)
-            g_loss.backward()
-            g_rec_loss.backward()
+            g_rec_loss=rec_loss(generated_imgs,targets)
+            g_total_loss=g_loss+g_rec_loss
+            g_total_loss.backward()
             optimizer_G.step()
 
             # Train Discriminator
 
 
-            epoch_loss_g += g_loss.item()+g_rec_loss.item()
+            epoch_loss_g += g_total_loss.item()
             epoch_loss_d += d_loss.item()
             t=t+1
             # if t==1:
