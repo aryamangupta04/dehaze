@@ -34,12 +34,6 @@ def visualize_sample(data_loader, model, device, num_images=3):
     data, targets = data.to(device), targets.to(device)
     with torch.no_grad():
         outputs = model(data)
-    # Assuming data is normalized
-    inv_normalize = transforms.Normalize(
-        mean=[-0.64/0.14, -0.6/0.15, -0.58/0.152],
-        std=[1/0.14, 1/0.15, 1/0.152]
-    )
-    data, outputs, targets = inv_normalize(data), inv_normalize(outputs), inv_normalize(targets)
     imgs = torch.cat([data[:num_images], outputs[:num_images], targets[:num_images]], dim=0)
     grid = make_grid(imgs, nrow=num_images)
     plt.figure(figsize=(15, 5))
