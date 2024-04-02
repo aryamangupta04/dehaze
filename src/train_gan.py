@@ -42,6 +42,7 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
         epoch_loss_d = 0.0
         for data,targets in train_loader:
             data, targets = data.to(device), targets.to(device)
+            generated_imgs = generator(data)
             valid = torch.ones((targets.size(0), 1), device=device, requires_grad=False)
             fake = torch.zeros((targets.size(0), 1), device=device, requires_grad=False)
             optimizer_D.zero_grad()
@@ -53,9 +54,9 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
 
             # Train Generator
             optimizer_G.zero_grad()
-            generated_imgs = generator(data)
+            # generated_imgs = generator(data)
             g_loss = adversarial_loss(discriminator(generated_imgs), valid.squeeze(1))
-            g_rec_loss=rec_loss(generated_imgs,targets)
+            g_rec_loss=rec_loss(generated_imgs.detach(),targets)
             g_loss.backward(retain_graph=True)
             g_rec_loss.backward(retain_graph=True)
             optimizer_G.step()
