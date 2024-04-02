@@ -32,7 +32,7 @@ def train_GAN(generator, discriminator, train_loader, val_loader, device, num_ep
     rec_loss=nn.L1Loss()
     g_lr=0.002
     optimizer_G = optim.Adam(generator.parameters(), lr=0.03)
-    optimizer_D = optim.Adam(discriminator.parameters(), lr=0.001)
+    optimizer_D = optim.Adam(discriminator.parameters(), lr=0.0009)
     highest_psnr = 0.0
     for epoch in range(num_epochs):
         t=0
