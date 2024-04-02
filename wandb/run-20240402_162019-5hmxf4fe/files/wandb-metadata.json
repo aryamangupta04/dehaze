@@ -1,0 +1,53 @@
+{
+    "os": "Windows-10-10.0.22621-SP0",
+    "python": "3.10.0",
+    "heartbeatAt": "2024-04-02T10:50:51.163163",
+    "startedAt": "2024-04-02T10:50:19.694016",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\HP PAVILION\\Desktop\\gans\\src\\train.py",
+    "codePathLocal": "src\\train.py",
+    "codePath": "src\\train.py",
+    "git": {
+        "remote": "https://github.com/aryamangupta04/dehaze.git",
+        "commit": "1acaf3f46369b0e73163e698ce949f09a36ab9a4"
+    },
+    "email": "aryamangupta2004@gmail.com",
+    "root": "C:/Users/HP PAVILION/Desktop/gans",
+    "host": "hp",
+    "username": "HP PAVILION",
+    "executable": "C:\\Users\\HP PAVILION\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 3000.0,
+        "min": 0.0,
+        "max": 3000.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 3000.0,
+            "min": 0.0,
+            "max": 3000.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 237.82030868530273,
+            "used": 181.18476486206055
+        }
+    },
+    "gpu": "NVIDIA GeForce GTX 1650 Ti",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce GTX 1650 Ti",
+            "memory_total": 4294967296
+        }
+    ],
+    "memory": {
+        "total": 7.36431884765625
+    }
+}

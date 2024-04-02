@@ -10,10 +10,8 @@ import matplotlib.pyplot as plt
 from torchvision.utils import make_grid
 import torchvision.utils
 import numpy as np
+import wandb
 def show_images(images, title=None, nrow=5):
-    """
-    Utility function for showing images with matplotlib
-    """
     images = torchvision.utils.make_grid(images, nrow=nrow)
     np_images = images.numpy()
     plt.figure(figsize=(20, 10))
@@ -23,6 +21,8 @@ def show_images(images, title=None, nrow=5):
     plt.axis('off')
     plt.show()
 def train(train_loader,model,epochs,iterations,device):
+    wandb.init(project='dehaze', entity='aryamangupta2004') 
+    wandb.watch(model, log_freq=100)
     i=0
     model.train()
     highest_psnr=0.0
@@ -38,11 +38,13 @@ def train(train_loader,model,epochs,iterations,device):
             loss.backward()
             optimizer.step()
             epoch_loss+=loss.item()
+        wandb.log({"Training Loss": epoch_loss, "Epoch": epoch + 1})
         print("the loss for epoch ",i," is ",epoch_loss)
         # if(epoch==3):
         #     validate_and_visualize(val_loader,model,device)
         i=i+1
         avg_psnr = validate_and_calculate_psnr(val_loader, model, device)
+        wandb.log({"Average PSNR": avg_psnr, "Epoch": epoch + 1})
         print(f"Epoch {epoch + 1}, Average PSNR: {avg_psnr} dB")
         t=t+1
         if t==1:
@@ -96,6 +98,7 @@ if __name__=='__main__':
     loss_func=nn.MSELoss()
     optimizer=optim.Adam(model.parameters(),lr=opt.lr)
     val_loader=OTS_val_loader
+    wandb.login(key='c9e1ee6204d2bc6101067654506f776e67ef818e')
     train(train_loader,model,opt.epochs,opt.itr,opt.device)
     
     
